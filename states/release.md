@@ -1,43 +1,30 @@
 # release
 
-Finalize a completed work unit.
+Finalize an accepted work unit.
 
 ## Intent
-- clean up
-- document
-- leave the repo in a sane state
-- publish the result like a disciplined engineer, not like a raccoon leaving the kitchen
+- do the shipping cleanup
+- refresh docs if needed
+- leave the repo in a sane releasable state
 
-## Allowed actions
-- refresh documentation
-- move or remove temporary artifacts
-- update task board
-- update memory
-- summarize accepted result
-- update changelog or release notes if the repo uses them
-- git commit
-- git push if publishing or pushing was already authorized for this work unit
-- prepare the next queued planning item
+## Allowed
+- summarize the accepted result
+- refresh docs or changelog if the repo uses them
+- clean temporary artifacts related to the accepted work
+- commit
+- push if publishing was already authorized
+- record the next task
 
 ## Not allowed
 - new feature work
-- new debugging branch
+- new debugging branches
 
-## Required outputs
-- cleanup completed or explicitly deferred
-- docs updated or explicitly deferred
-- backlog or task board updated
-- release or publish status made explicit
+## Required output
+- cleanup status
+- docs status
+- publish status
+- next task status
 
 ## Typical next states
 - `cleanup`
-- `refactoring` when the release is done but the fresh code shape clearly wants bounded structural simplification before more feature growth
-
-## Release checklist
-- temp or debug artifacts classified or removed as part of shipping this accepted work unit
-- docs touched if behavior or structure changed
-- changelog or release notes updated if the repo uses them
-- git commit created
-- git push completed if push was authorized
-- next task recorded
-- no hidden experimental leftovers
+- `refactoring`

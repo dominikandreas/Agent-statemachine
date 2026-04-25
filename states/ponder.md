@@ -3,42 +3,32 @@
 Step back and think at the high level.
 
 ## Intent
-- reflect roughly once per day
-- review what changed since the last `ponder`
-- reconnect daily activity to higher-level goals
-- notice drift, neglected priorities, or repeated loops
-- allow some mental wandering so adjacent ideas, odd patterns, and off-track-but-interesting threads can surface before they are prematurely crushed into a task
-- consolidate or clean up task tracking, check what has been done but not marked as such, and update a completion log if the repo uses one
+- reflect on recent movement and drift
+- reconnect activity to the actual objective
+- notice patterns that should change the next step
 
-## Allowed actions
-- read recent `memory/YYYY[-MM[-DD]].md` entries
-- read `memory/heartbeat_state.json`
-- read current task or planning artifacts
-- summarize progress, direction, and risks
-- write one short strategic note or recommendation
-- briefly follow a surprising tangent if it helps reveal drift, opportunity, or a better framing
+## Allowed
+- read recent memory, task notes, and planning artifacts
+- summarize progress, direction, and risk
+- update a completion log if the repo uses one
 
 ## Not allowed
-- slipping into implementation
+- implementation
 - broad diagnostics without synthesis
-- turning reflection into a vague essay with no conclusion
 
-## Required outputs
+## Required output
 - what changed since the last `ponder`
-- current high-level goals
-- whether recent actions are still serving the main objective, or whether local optimization, cleanup, or curiosity started replacing goal progress
-- one observed drift, risk, or opportunity
+- whether current work still serves the main goal
+- one drift, risk, or opportunity
 - one recommended next emphasis
 - what deserves less focus now
 
-## Reply contract
-- `ponder` must not receive a forced `TARGET` as input context
-- `ponder` is not a worker state receiving a scoped assignment
-- it may emit a `TARGET` if reflection naturally crystallizes into one concrete next focus
-- it may wander a bit before converging, but it must still end with a useful synthesis or steering observation
+## Rules
+- `ponder` must not receive a forced `TARGET`.
+- It may emit `TARGET` only if reflection naturally converges on one.
 
 ## Typical next states
 - `planning`
 - `inspection_and_ideation`
 - `cleanup`
-- `refactoring` if reflection surfaced one clear complexity seam worth simplifying next
+- `refactoring`

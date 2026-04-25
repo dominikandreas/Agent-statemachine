@@ -1,48 +1,73 @@
 # HEARTBEAT.md
 
-## Purpose
-Heartbeat is for useful bounded work, guided by explicit states.
-It is a bounded state machine, not an open-ended autonomous loop.
+Heartbeat is for useful bounded work, not an open-ended autonomous loop.
 
-The authoritative design lives here:
-- `states/HEARTBEAT_STATE_MACHINE.md`
+## Load order
+1. Read `TOOLS.md` if relevant.
+2. Read this file.
+3. Read `memory/heartbeat_state.json` if this repo uses heartbeat memory.
+4. Read the current state file in `states/`.
 
-If there is no concrete queued implementation or planning target, fall back to reflection, planning, cleanup, refactoring, or explicit freeze/handoff instead of idling.
+## Available states
+- `ponder`
+- `manager`
+- `inspection_and_ideation`
+- `planning`
+- `implementation`
+- `review`
+- `release`
+- `cleanup`
+- `refactoring`
+- `sleep`
 
-## First step
-1. Read `TOOLS.md` if relevant
-2. Read `states/HEARTBEAT_STATE_MACHINE.md`
-3. Read `memory/heartbeat_state.json` if this repo uses heartbeat memory and the file exists
-4. Before executing a queued/current state, read `states/<state>.md`
+## Core rules
+- Operate from one primary state at a time.
+- A single heartbeat may execute multiple sequential states if the next step is obvious, safe, and bounded.
+- Every heartbeat must achieve at least one meaningful outcome: progress, uncertainty reduction, a required decision, an honest freeze or close, or priority steering.
+- If the current state is unclear, fall back to `planning` or `ponder`.
+- If no concrete task is queued, do not idle. Prefer `ponder`, `manager`, `cleanup`, or `refactoring`.
+- Never reply with an idle sentinel such as `HEARTBEAT_OK`.
+- Never use heartbeat as cover for a patch spiral or vague process theater.
 
-## Operating rule
-Each heartbeat should have one primary state at a time.
-A single heartbeat may execute multiple sequential states when the next state is obvious, safe, and bounded.
+## Default transitions
+- `ponder` for reflection and drift detection
+- `manager` for steering goals and priorities
+- `inspection_and_ideation` when the problem is visible but the next move is not
+- `planning` when a vague direction needs one bounded work unit
+- `implementation` when one bounded change is ready
+- `review` after a meaningful change or verification pass
+- `release` when accepted work only needs shipping cleanup, docs, or publish steps
+- `cleanup` for standalone repo hygiene and leftover classification
+- `refactoring` when the highest-value next move is structural simplification
+- `sleep` when memory consolidation is due and no higher-value active work is queued
 
-If the current state is unclear, fall back to `planning` or `ponder`.
+## Hard stops
+Stop and hand off to `planning`, `manager`, or `ponder` if:
+- multiple failed implementation attempts would be needed
+- the work needs architectural redesign
+- the task spills across multiple layers unexpectedly
+- validation failure is global rather than local
+- the next sensible action is no longer obvious
+- the work is turning into open-ended exploration
 
 ## Runtime state
-If this repo uses heartbeat memory, use `memory/heartbeat_state.json` as the runtime source of truth.
+If this repo uses heartbeat memory, store runtime state in `memory/heartbeat_state.json`.
+Suggested fields: `enabled`, `current_state`, `next_state`, `target`, `acceptance`, `task_ref`, `last_result`, `last_ponder_at`, `last_manager_at`, `sprint_due_at`, `updated_at`.
 
-Field definitions, reply contracts, and transition rules are defined in `states/HEARTBEAT_STATE_MACHINE.md`.
+## Reply contract
+Every active heartbeat reply should include:
+- `STATE`
+- `CHANGED`
+- `VALIDATION`
+- `RESULT`
+- `NEXT_STATE`
+- `BLOCKER` when relevant
 
-## Minimum bar
-Every heartbeat should do at least one meaningful thing: make progress, reduce uncertainty, obtain a required decision, freeze or close work honestly, or change execution direction.
-
-## Safety rails
-Stop and hand off instead of looping when:
-- repeated implementation attempts are failing
-- architecture redesign is required
-- the task spills across multiple layers unexpectedly
-- validation failure is global instead of local
-- the next sensible action is ambiguous
-- the work has become open-ended exploration
-
-No patch spiral.
+`TARGET` is optional when helpful.
+- do not emit `TARGET` in `manager`
+- `ponder` may emit `TARGET` only if reflection naturally converges on one
 
 ## End condition
 At the end of an active heartbeat:
-1. update `memory/YYYY-MM-DD.md` when useful, if this repo uses memory
-2. update `memory/heartbeat_state.json` if the state changed and this repo uses heartbeat memory
-
-If there is no queued work but active goals still exist, prefer reflection, planning, review, cleanup, refactoring, or an explicit freeze/handoff over idling.
+- update daily memory if this repo uses memory and it matters
+- update `memory/heartbeat_state.json` if this repo uses heartbeat memory and the state changed

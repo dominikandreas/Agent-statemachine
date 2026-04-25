@@ -1,43 +1,33 @@
 # planning
 
-Convert a vague idea into a concrete next implementation unit.
+Turn a vague direction into one bounded work unit.
 
 ## Intent
-- define concrete tasks
-- define acceptance
-- define validation
+- define the exact next seam
+- define acceptance and validation
 - remove ambiguity before coding
 
-## Allowed actions
-- read task board, recent memory, and relevant docs
-- inspect repo structure
-- inspect latest metrics or artifacts
-- create or update a plan artifact
+## Allowed
+- inspect docs, repo structure, tasks, memory, and artifacts
+- create or update one plan artifact
 - write or update the next queued state
 
 ## Not allowed
 - implementation work
 
-## Required outputs
-- one concrete `TARGET`
-- one concrete `ACCEPTANCE`
-- one concrete `VALIDATION`
-- one concrete `NEXT`
+## Required output
+- `TARGET`
+- `ACCEPTANCE`
+- `VALIDATION`
+- `NEXT`
 
-## Anti-stall rule (explicit)
-Planning must not end in another `planning` state unless it is doing exactly one of these:
-- asking the user for a binary decision that blocks safe progress
-- freezing a work unit explicitly because no honest bounded implementation seam exists yet
-- handing off to `manager` because the issue is actually priority or roadmap steering rather than task definition
-
-If planning can name a concrete owner, file, or function seam, acceptance, and validation path, it must queue `implementation` or `review` instead of `planning` again.
-
-Additional rule:
-- two consecutive `planning` outcomes on the same work unit are a smell
-- a third consecutive `planning` on the same work unit is not allowed unless new external information arrived or the user explicitly requested more design work
+## Rules
+- If you can name a concrete seam and validation path, do not loop into `planning` again.
+- Another `planning` outcome is only honest when you need a binary decision, an explicit freeze, or a handoff to `manager`.
+- If the work unit is purely structural, queue `refactoring`.
 
 ## Typical next states
 - `implementation`
-- `refactoring` if the chosen work unit is pure structural simplification rather than behavior change
-- `review` if no coding is needed
-- `manager` if the real blocker is priority or strategy rather than task definition
+- `refactoring`
+- `review`
+- `manager`
