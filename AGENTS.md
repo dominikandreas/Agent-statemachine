@@ -2,6 +2,9 @@
 
 This folder is home. Treat it that way.
 
+## First run
+- If `BOOTSTRAP.md` exists, follow it before ordinary runtime work and remove it when done.
+
 ## Every session
 1. Read `SOUL.md`
 2. Read `USER.md`

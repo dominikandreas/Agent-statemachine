@@ -14,6 +14,19 @@ These are the files that matter during execution:
 
 Everything else is reference material.
 
+## Onboarding and re-onboarding
+This repo intentionally does not ship a default `memory/heartbeat_state.json`.
+
+If the workspace is new, or the old long-term goals are obsolete:
+1. copy `BOOTSTRAP.example.md` to `BOOTSTRAP.md`
+2. let the agent follow it once
+3. have the agent ask for high-level and long-term goals
+4. write durable goals to `GOALS.md` or `MEMORY.md`
+5. seed `memory/heartbeat_state.json` with `next_state: "manager"`
+6. delete `BOOTSTRAP.md` when onboarding is complete
+
+That keeps onboarding logic out of normal runtime context.
+
 ## Quick start with a custom OpenClaw agent
 
 1. Use this repo as the workspace for your agent.
@@ -121,6 +134,7 @@ These are templates, not mandatory standards:
 - `TOOLS.md` for local commands or notes
 - `AGENTS.md` for workspace rules
 - `HEARTBEAT.md` for runtime behavior
+- `BOOTSTRAP.example.md` for one-shot onboarding or re-onboarding
 
 ## OpenClaw docs
 - Heartbeat guide: https://docs.openclaw.ai/gateway/heartbeat
