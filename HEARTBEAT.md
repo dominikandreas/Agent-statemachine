@@ -38,7 +38,7 @@ Heartbeat is for useful bounded work, not an open-ended autonomous loop.
 - `review` after a meaningful change or verification pass
 - `release` when accepted work only needs shipping cleanup, docs, or publish steps
 - `cleanup` for standalone repo hygiene and leftover classification
-- `refactoring` when the highest-value next move is structural simplification
+- `refactoring` when review or broader repo inspection shows that structural simplification is now the highest-value next move
 - `sleep` when memory consolidation is due and no higher-value active work is queued
 
 ## Hard stops
@@ -52,7 +52,13 @@ Stop and hand off to `planning`, `manager`, or `ponder` if:
 
 ## Runtime state
 If this repo uses heartbeat memory, store runtime state in `memory/heartbeat_state.json`.
-Suggested fields: `enabled`, `current_state`, `next_state`, `target`, `acceptance`, `task_ref`, `last_result`, `last_ponder_at`, `last_manager_at`, `sprint_due_at`, `updated_at`.
+Suggested fields: `enabled`, `current_state`, `next_state`, `target`, `acceptance`, `task_ref`, `last_result`, `last_ponder_at`, `last_manager_at`, `last_refactor_at`, `last_refactor_summary`, `work_units_since_refactor`, `sprint_due_at`, `updated_at`.
+
+Refactor tracking guidance:
+- `last_refactor_at` records the last completed refactoring pass
+- `last_refactor_summary` records what was simplified
+- `work_units_since_refactor` is an optional counter for how much accepted work landed after the last refactor
+- if refactor tracking is stale, missing, or clearly drifting upward, `review` should check the broader codebase for refactor candidates instead of only reviewing the local diff
 
 ## Reply contract
 Every active heartbeat reply should include:
@@ -71,3 +77,5 @@ Every active heartbeat reply should include:
 At the end of an active heartbeat:
 - update daily memory if this repo uses memory and it matters
 - update `memory/heartbeat_state.json` if this repo uses heartbeat memory and the state changed
+- after a completed `refactoring` pass, update `last_refactor_at` and `last_refactor_summary`
+- after accepted non-refactor work lands, increment or otherwise refresh `work_units_since_refactor` if this repo tracks it
