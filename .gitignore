@@ -1,0 +1,25 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Logs / temp
+*.log
+tmp/
+temp/
+.cache/
+
+# Workspace runtime state
+memory/
+memory-archive/
