@@ -1,5 +1,0 @@
-{
-  "deprecated": true,
-  "note": "Deprecated duplicate heartbeat state path. Use memory/heartbeat_state.json as the single source of truth.",
-  "redirect": "memory/heartbeat_state.json"
-}

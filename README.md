@@ -5,7 +5,7 @@ A lightweight workspace scaffold for running bounded agent work through explicit
 ## What this repo contains
 
 - `AGENTS.md` - workspace operating rules
-- `SOUL.md` - persona and working style
+- `SOUL.md` - persona and working style template
 - `USER.md` - operator preferences template
 - `TOOLS.md` - repo-local notes and useful commands
 - `HEARTBEAT.md` - heartbeat runtime guidance
@@ -23,7 +23,7 @@ Typical states include:
 - `implementation`
 - `review`
 - `release`
-- `cleanup_and_refactoring`
+- `cleanup`
 - `refactoring`
 - `sleep`
 
@@ -32,7 +32,7 @@ A state can transition to another state when the next step is obvious, safe, and
 ## Suggested usage
 
 1. Copy this workspace scaffold into a fresh repo or workspace.
-2. Adjust the top-level files for your environment:
+2. Adjust the top-level files for your environment. These are templates, not mandatory standards:
    - `SOUL.md` for persona/style
    - `USER.md` for operator preferences
    - `TOOLS.md` for local commands and non-secret notes
@@ -55,6 +55,7 @@ A common flow looks like this:
 If the task is too vague, go back to `planning`.
 If the task turns into structural simplification, switch to `refactoring`.
 If no concrete implementation seam exists, use `inspection_and_ideation` or `ponder`.
+If the repo needs hygiene work outside a specific shipping step, use `cleanup`.
 
 ## Customization notes
 
@@ -63,5 +64,4 @@ Before publishing or sharing:
 - remove private names, hosts, paths, tokens, and infrastructure details
 - replace any symlinks with regular files if you want the repo to be portable
 - make sure `USER.md`, `TOOLS.md`, and `AGENTS.md` match the intended public or private use
-- check that `states/heartbeat_state.json` does not point to a private local path
-
+- check that any memory examples or local notes do not point to a private local path

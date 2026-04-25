@@ -3,19 +3,19 @@
 Simplify structure so future work stays cheaper, clearer, and less tangled.
 
 ## Intent
-- reduce complexity before it hardens into policy spaghetti
+- reduce complexity before it hardens into logic spaghetti
 - split files or modules that are too large or own too many concerns
 - remove dead code when removal needs real checking rather than obvious trash pickup
-- improve boundaries, naming, ownership, and structure without hiding feature work inside "cleanup"
+- improve boundaries, naming, ownership, and structure without hiding feature work inside `cleanup`
 - make growth easier after a release while context is still fresh
 
 ## Allowed actions
-- inspect file size / function size / ownership seams
+- inspect file size, function size, or ownership seams
 - split modules or helpers
 - remove dead code after verifying it is actually dead
 - simplify control flow, boundaries, and duplicated logic
 - make bounded architectural improvements that do not change the product goal
-- add / update tests needed to protect the refactor
+- add or update tests needed to protect the refactor
 - run bounded validation
 
 ## Not allowed
@@ -38,7 +38,7 @@ Simplify structure so future work stays cheaper, clearer, and less tangled.
 - repeated implementation pain points point to one ownership or complexity seam
 
 ## Required outputs
-- exact complexity / ownership problem being reduced
+- exact complexity or ownership problem being reduced
 - exact files changed
 - exact validation run
 - blunt statement of what became simpler

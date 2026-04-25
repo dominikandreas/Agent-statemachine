@@ -9,19 +9,20 @@ Sleep consolidates memory.
 - remove unnecessary chatter and transient noise from daily files
 
 ## Required actions
-- **Compress every single-day memory file older than two days**, with no exceptions or sampling. Do a complete scan first, then consolidate all eligible `YYYY-MM-DD.md` files into `YYYY-MM.md` in the same sleep pass.
-- memories already compressed into `YYYY-MM.md` and older than two months are compressed into `YYYY.md`
-- after consolidation, move all consolidated single-day files into `./memory-archive`
-- important facts are underlined, not compressed away
-- before finishing sleep, verify there are no remaining single-day memory files older than two days in `memory/`
+- If the repo uses daily memory files, scan all single-day files older than the active consolidation threshold, using two days as the default unless the repo defines another rule.
+- Consolidate eligible `YYYY-MM-DD.md` files into `YYYY-MM.md` in one sleep pass.
+- Monthly files older than two months may be consolidated into `YYYY.md` if that level of compression is actually in use.
+- After consolidation, move archived daily files into `memory-archive/` or the repo's defined archive location.
+- Important facts should be preserved explicitly, not compressed away.
+- Before finishing sleep, verify there are no eligible single-day memory files left unprocessed, or explain what blocked that.
 
 ## Required outputs
 - curiosities or contradictions, and either clear them up or mention them to the user
 - actions taken to compress history
-- explicit confirmation that no single-day memory files older than two days remain after the pass, or a blunt explanation of what blocked that
+- explicit confirmation that no eligible single-day memory files remain after the pass, or a blunt explanation of what blocked that
 - any knowledge that should remain provisional instead of being promoted as stable memory
 
 ## Typical next states
 - `ponder`
-- `inspection and ideation`
+- `inspection_and_ideation`
 - `manager`
