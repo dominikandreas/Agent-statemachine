@@ -24,6 +24,7 @@ Simplify structure so future work stays cheaper and clearer.
 - exact files changed
 - exact validation run
 - blunt statement of what became simpler
+- if heartbeat memory is in use, the `last_refactor_at` and `last_refactor_summary` update that should be recorded
 
 ## Typical next states
 - `review`
